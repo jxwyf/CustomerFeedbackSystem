@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dy.wind.mapper.DyFeedbackOrderMapper">
+    <resultMap id="BaseResultMap" type="com.dy.wind.entity.DyFeedbackOrder">
+        <!--@mbg.generated-->
+        <!--@Table dy_feedback_order-->
+        <id column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="single_number" jdbcType="BIGINT" property="singleNumber"/>
+        <result column="order_area" jdbcType="VARCHAR" property="orderArea"/>
+        <result column="category" jdbcType="VARCHAR" property="category"/>
+        <result column="feedback_name" jdbcType="VARCHAR" property="feedbackName"/>
+        <result column="feedback_phone" jdbcType="VARCHAR" property="feedbackPhone"/>
+        <result column="alarm_number" jdbcType="INTEGER" property="alarmNumber"/>
+        <result column="teamviewer_address" jdbcType="VARCHAR" property="teamviewerAddress"/>
+        <result column="problem_description" jdbcType="VARCHAR" property="problemDescription"/>
+        <result column="file_address" jdbcType="VARCHAR" property="fileAddress"/>
+        <result column="order_create_time" jdbcType="TIMESTAMP" property="orderCreateTime"/>
+        <result column="order_update_time" jdbcType="TIMESTAMP" property="orderUpdateTime"/>
+        <result column="ny_id" jdbcType="INTEGER" property="nyId"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        `uid`, single_number, order_area, category, feedback_name, feedback_phone, alarm_number,
+        teamviewer_address, problem_description, file_address, order_create_time, order_update_time,
+        ny_id
+    </sql>
+    <sql id="Page_List">
+        <!--@mbg.generated-->
+        `uid`, single_number, order_area, category, feedback_name, feedback_phone, alarm_number,
+        teamviewer_address, problem_description, order_create_time, order_update_time,
+        ny_id
+    </sql>
+    <select id="defaultAll" resultType="com.dy.wind.entity.DyFeedbackOrder" resultMap="BaseResultMap" flushCache="true">
+        select
+        <include refid="Page_List"/>
+        from dy_feedback_order as t
+                where t.ny_id = 0
+        <if test="feedbackName != null">
+            and t.feedback_name = #{feedbackName,jdbcType=VARCHAR}
+        </if>
+        order by order_create_time desc
+    </select>
+
+    <update id="updateBySingle" parameterType="com.dy.wind.entity.DyFeedbackOrder">
+        update dy_feedback_order
+                set
+        <if test="category != null">
+            category = #{category},
+        </if>
+        <if test="problemDescription != null">
+            problem_description = #{problemDescription}
+        </if>
+        where single_number = #{singleNumber}
+    </update>
+    <select id="selectCondition" resultType="com.dy.wind.entity.DyFeedbackOrder">
+        select
+        <include refid="Page_List"/>
+        from dy_feedback_order
+        <where>
+            <if test="singleNum != null">
+                single_number = #{singleNum,jdbcType=BIGINT}
+            </if>
+            <if test="feedbackName != null">
+                and feedback_name like concat('%', #{feedbackName,jdbcType=VARCHAR}, '%')
+            </if>
+            <if test="feedbackPhone != null">
+                and feedback_phone like concat('%', #{feedbackPhone,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+    </select>
+</mapper>

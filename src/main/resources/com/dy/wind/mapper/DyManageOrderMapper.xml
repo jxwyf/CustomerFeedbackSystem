@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dy.wind.mapper.DyManageOrderMapper">
+  <resultMap id="BaseResultMap" type="com.dy.wind.entity.DyManageOrder">
+    <!--@mbg.generated-->
+    <!--@Table dy_manage_order-->
+    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="single_number" jdbcType="INTEGER" property="singleNumber" />
+    <result column="result_order" jdbcType="INTEGER" property="resultOrder" />
+    <result column="order_area" jdbcType="VARCHAR" property="orderArea" />
+    <result column="category" jdbcType="VARCHAR" property="category" />
+    <result column="feedback_name" jdbcType="VARCHAR" property="feedbackName" />
+    <result column="feedback_phone" jdbcType="VARCHAR" property="feedbackPhone" />
+    <result column="alarm_number" jdbcType="INTEGER" property="alarmNumber" />
+    <result column="teamviewer_address" jdbcType="VARCHAR" property="teamviewerAddress" />
+    <result column="problem_description" jdbcType="VARCHAR" property="problemDescription" />
+    <result column="order_state" jdbcType="VARCHAR" property="orderState" />
+    <result column="order_feedback" jdbcType="VARCHAR" property="orderFeedback" />
+    <result column="order_create_time" jdbcType="TIMESTAMP" property="orderCreateTime" />
+    <result column="order_update_time" jdbcType="TIMESTAMP" property="orderUpdateTime" />
+    <result column="feedback_time" jdbcType="TIMESTAMP" property="feedbackTime" />
+    <result column="ny_id" jdbcType="INTEGER" property="nyId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `uid`, single_number, result_order, order_area, category, feedback_name, feedback_phone, 
+    alarm_number, teamviewer_address, problem_description, order_state, order_feedback, 
+    order_create_time, order_update_time, feedback_time, ny_id
+  </sql>
+</mapper>

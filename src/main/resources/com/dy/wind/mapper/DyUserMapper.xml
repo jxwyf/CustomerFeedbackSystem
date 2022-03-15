@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dy.wind.mapper.DyUserMapper">
+  <resultMap id="BaseResultMap" type="com.dy.wind.entity.DyUser">
+    <!--@mbg.generated-->
+    <!--@Table dy_user-->
+    <id column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="area" jdbcType="VARCHAR" property="area" />
+    <result column="identity" jdbcType="VARCHAR" property="identity" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="ny_id" jdbcType="INTEGER" property="nyId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--@mbg.generated-->
+    `uid`, username, `password`, area, `identity`, create_time, update_time, ny_id
+  </sql>
+  <insert id="insertUser" parameterType="com.dy.wind.entity.DyUser">
+    insert into dy_user(username, password, area, identity)
+    select #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{identity,jdbcType=VARCHAR}
+    from dual
+    where not exists(select * from dy_user where username = #{username,jdbcType=VARCHAR});
+  </insert>
+  <select id="loginUser" parameterType="com.dy.wind.entity.DyUser" resultType="java.lang.Integer">
+    select count(uid) from dy_user where username = #{username,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR};
+  </select>
+  <select id="selectByUserName" resultType="com.dy.wind.entity.DyUser">
+    select * from dy_user where username = #{username}
+  </select>
+
+  <select id="selectByUsername" resultType="boolean">
+    select * from dy_user where username = #{username}
+  </select>
+</mapper>
